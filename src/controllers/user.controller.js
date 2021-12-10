@@ -12,6 +12,27 @@ router.get("/", async (req, res) => {
   });
 });
 
+
+router.get("/:id", async (req, res) => {
+  const user = await User.findById(req.params.id).lean().exec();
+  return res.render("products/single", {
+    user,
+  });
+});
+
+
+router.post("/news", upload.single("profile_pic"), async (req, res) => {
+  try {
+    const newuser = await User.create({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      profile_pic: req.file.path,
+    });
+    return res.render("products/single",{ newuser });
+  } catch (e) {
+    return res.status(500).json({ message: e.message, Status: "Failed" });
+  }
+});
 router.post("/", upload.single("profile_pic"), async (req, res) => {
   try {
     const newuser = await User.create({

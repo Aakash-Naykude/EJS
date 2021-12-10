@@ -11,7 +11,7 @@
     <% users.forEach(user =>{ %>
     <p onclick="clicked('<%= JSON.stringify(user) %>')"><%= user.first_name %></p>
     <p><%= user.last_name %></p>
-    <img src="<%= user.profile_pic %>" />
+    <p> <a href="useruploads/<%= user._id %>">Click here</a> </p>
     <% }) %>
     <script src="js/users.js"></script>
   </body>
